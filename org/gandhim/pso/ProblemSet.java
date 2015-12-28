@@ -21,9 +21,11 @@ public class ProblemSet {
 	public static final double LOC_X_HIGH = 10;
 	public static final double LOC_Y_LOW = -0.12;
 	public static final double LOC_Y_HIGH = 0.12;
-	public static final double VEL_LOW = -0.0001;
-	public static final double VEL_HIGH = 0.0001;
-	
+	public static final double LOC_Theta_LOW = -0.12;
+	public static final double LOC_Theta_HIGH = 0.12;
+	public static final double VEL_LOW = -0.01;
+	public static final double VEL_HIGH = 0.1;
+	public static final String str = "Single_ECG.txt";
 	public static final double ERR_TOLERANCE = 1E-20; // the smaller the tolerance, the more accurate the result, 
 	                                                  // but the number of iteration is increased
 	
@@ -45,7 +47,6 @@ public class ProblemSet {
 		double TTheta = location.getLoc()[13]; 
 		double DC = location.getLoc()[14];
 		double[] Single_ECG;
-		String str = "Single_ECG.txt";
 		Single_ECG = readData(str);
 		
 		//排除非法解
@@ -75,12 +76,12 @@ public class ProblemSet {
 		}
 		if(PTheta<-0.5)
 			PTheta=-0.5;
-		if(QTheta<-0.25)
-			QTheta=-0.25;
+		if(QTheta<-0.15)
+			QTheta=-0.15;
 		if(TTheta>0.5)
 			TTheta=0.5;
-		if(STheta>0.25)
-			STheta=0.25;
+		if(STheta>0.15)
+			STheta=0.15;
 		if(PBeta>0.5)
 			PBeta=0.5;
 		if(QBeta>0.5)
@@ -101,14 +102,36 @@ public class ProblemSet {
 			SBeta=-0.5;
 		if(TBeta<-0.5)
 			TBeta=-0.5;
+
+		if(PAlpha<0)
+			PAlpha=-PAlpha;
+		if(QAlpha>0)
+			QAlpha=-QAlpha;
+		if(RAlpha<0)
+			RAlpha=-RAlpha;
+		if(SAlpha>0)
+			SAlpha=-SAlpha;
+		if(TAlpha<0)
+			TAlpha=-TAlpha;
 		
+		if(PAlpha>RAlpha)
+			PAlpha/=2;
+		if(TAlpha>RAlpha)
+			TAlpha/=2;
+		
+		
+		location.getLoc()[0]=PAlpha;
 		location.getLoc()[1]=PBeta;
 		location.getLoc()[2]=PTheta;
+		location.getLoc()[3]=QAlpha;
 		location.getLoc()[4]=QBeta;
 		location.getLoc()[5]=QTheta;
+		location.getLoc()[6]=RAlpha;
 		location.getLoc()[7]=RBeta;
+		location.getLoc()[8]=SAlpha;
 		location.getLoc()[9]=SBeta;
 		location.getLoc()[10]=STheta;
+		location.getLoc()[11]=TAlpha;
 		location.getLoc()[12]=TBeta;
 		location.getLoc()[13]=TTheta;
 		//修正結束
@@ -119,11 +142,12 @@ public class ProblemSet {
 			RWave=RAlpha*Math.pow(RBeta, 2)*Math.exp(-Math.pow(((Math.PI*(double)2*(double)i)/Single_ECG.length)-Math.PI, 2)/((double)2*Math.pow(RBeta, 2)));
 			SWave=SAlpha*Math.pow(SBeta, 2)*Math.exp(-Math.pow(((Math.PI*(double)2*(double)i)/Single_ECG.length)-Math.PI-Math.PI*(double)2*STheta, 2)/((double)2*Math.pow(SBeta, 2)));
 			TWave=TAlpha*Math.pow(TBeta, 2)*Math.exp(-Math.pow(((Math.PI*(double)2*(double)i)/Single_ECG.length)-Math.PI-Math.PI*(double)2*TTheta, 2)/((double)2*Math.pow(TBeta, 2)));
-			Gofn=PWave+QWave+RWave+SWave+TWave;//+DC;
+			Gofn=PWave+QWave+RWave+SWave+TWave+DC;
 			//System.out.println(PWave+"\t"+QWave+"\t"+RWave+"\t"+SWave+"\t"+TWave+"\t"+Gofn);
+			//System.out.println(Gofn);
 			result+=Math.pow(Gofn-Single_ECG[i],2);
 		}
-		result=1-((double)Single_ECG.length/result);
+		result=((double)result/Single_ECG.length);
 		
 		return result;
 	}
@@ -133,11 +157,14 @@ public class ProblemSet {
     	List<String> lines;
 		try {
 			lines = Files.readAllLines(Paths.get(record));
-	    	sig0 = new double[lines.size()];
+	    	sig0 = new double[lines.size()-1];
 	    	int index=0;
 	    	for(String line:lines){
 	    		double tmpD = Double.parseDouble(line);
-	    		sig0[index++]=tmpD;
+	    		if(index==0)
+	    			index++;
+	    		else
+	    			sig0[index++-1]=tmpD;
 	    		//System.out.printf("%f\n",tmpD);
 	    	}
 		} catch (IOException e) {
