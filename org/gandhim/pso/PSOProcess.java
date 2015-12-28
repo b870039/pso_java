@@ -64,12 +64,6 @@ public class PSOProcess implements PSOConstants {
 								(r2 * C2) * (gBestLocation.getLoc()[j] - p.getLocation().getLoc()[j]);
 				}				
 				
-				//newVel[0] = (w * p.getVelocity().getPos()[0]) + 
-				//			(r1 * C1) * (pBestLocation.get(i).getLoc()[0] - p.getLocation().getLoc()[0]) +
-				//			(r2 * C2) * (gBestLocation.getLoc()[0] - p.getLocation().getLoc()[0]);
-				//newVel[1] = (w * p.getVelocity().getPos()[1]) + 
-				//			(r1 * C1) * (pBestLocation.get(i).getLoc()[1] - p.getLocation().getLoc()[1]) +
-				//			(r2 * C2) * (gBestLocation.getLoc()[1] - p.getLocation().getLoc()[1]);
 				Velocity vel = new Velocity(newVel);
 				p.setVelocity(vel);
 				
@@ -78,8 +72,7 @@ public class PSOProcess implements PSOConstants {
 				for(int j=0;j<PROBLEM_DIMENSION;j++){
 					newLoc[j] = p.getLocation().getLoc()[j] + newVel[j];
 				}
-				//newLoc[0] = p.getLocation().getLoc()[0] + newVel[0];
-				//newLoc[1] = p.getLocation().getLoc()[1] + newVel[1];
+				
 				Location loc = new Location(newLoc);
 				p.setLocation(loc);
 			}
@@ -92,8 +85,7 @@ public class PSOProcess implements PSOConstants {
 			for(int j=0;j<PROBLEM_DIMENSION;j++){
 				System.out.println("     Best " + j + ": " + gBestLocation.getLoc()[j]);
 			}
-			//System.out.println("     Best X: " + gBestLocation.getLoc()[0]);
-			//System.out.println("     Best Y: " + gBestLocation.getLoc()[1]);
+
 			System.out.println("     Value: " + ProblemSet.evaluate(gBestLocation));
 			
 			t++;
@@ -109,8 +101,7 @@ public class PSOProcess implements PSOConstants {
 		System.out.println(gBestLocation.getLoc()[0] + "\t" +gBestLocation.getLoc()[3] + "\t" +gBestLocation.getLoc()[6] + "\t" +gBestLocation.getLoc()[8] + "\t" +gBestLocation.getLoc()[11]);
 		System.out.println(gBestLocation.getLoc()[1] + "\t" +gBestLocation.getLoc()[4] + "\t" +gBestLocation.getLoc()[7] + "\t" +gBestLocation.getLoc()[9] + "\t" +gBestLocation.getLoc()[12]);
 		System.out.println(gBestLocation.getLoc()[2] + "\t" +gBestLocation.getLoc()[5] + "\t" + "0" + "\t" +gBestLocation.getLoc()[10] + "\t" +gBestLocation.getLoc()[13]);
-		//System.out.println("     Best X: " + gBestLocation.getLoc()[0]);
-		//System.out.println("     Best Y: " + gBestLocation.getLoc()[1]);
+		
 	}
 	
 	public void initializeSwarm() {
@@ -123,8 +114,6 @@ public class PSOProcess implements PSOConstants {
 			for(int j=0;j<PROBLEM_DIMENSION;j++){
 				loc[j] = ProblemSet.LOC_Y_LOW + generator.nextDouble() * (ProblemSet.LOC_Y_HIGH - ProblemSet.LOC_Y_LOW);
 			}
-			//loc[0] = ProblemSet.LOC_X_LOW + generator.nextDouble() * (ProblemSet.LOC_X_HIGH - ProblemSet.LOC_X_LOW);
-			//loc[1] = ProblemSet.LOC_Y_LOW + generator.nextDouble() * (ProblemSet.LOC_Y_HIGH - ProblemSet.LOC_Y_LOW);
 			Location location = new Location(loc);
 			
 			// randomize velocity in the range defined in Problem Set
@@ -132,8 +121,6 @@ public class PSOProcess implements PSOConstants {
 			for(int j=0;j<PROBLEM_DIMENSION;j++){
 				vel[j] = ProblemSet.VEL_LOW + generator.nextDouble() * (ProblemSet.VEL_HIGH - ProblemSet.VEL_LOW);
 			}
-			//vel[0] = ProblemSet.VEL_LOW + generator.nextDouble() * (ProblemSet.VEL_HIGH - ProblemSet.VEL_LOW);
-			//vel[1] = ProblemSet.VEL_LOW + generator.nextDouble() * (ProblemSet.VEL_HIGH - ProblemSet.VEL_LOW);
 			Velocity velocity = new Velocity(vel);
 			
 			p.setLocation(location);

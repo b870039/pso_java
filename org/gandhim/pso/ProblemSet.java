@@ -165,7 +165,6 @@ public class ProblemSet {
 	    			index++;
 	    		else
 	    			sig0[index++-1]=tmpD;
-	    		//System.out.printf("%f\n",tmpD);
 	    	}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
