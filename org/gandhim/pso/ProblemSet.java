@@ -17,15 +17,40 @@ import java.util.List;
 // you need to introduce a new variable (other than x and y)
 
 public class ProblemSet {
-	public static final double LOC_X_LOW = 1;
-	public static final double LOC_X_HIGH = 10;
-	public static final double LOC_Y_LOW = -0.12;
-	public static final double LOC_Y_HIGH = 0.12;
-	public static final double LOC_Theta_LOW = -0.12;
-	public static final double LOC_Theta_HIGH = 0.12;
-	public static final double VEL_LOW = -0.01;
-	public static final double VEL_HIGH = 0.1;
-	public static final String str = "Single_ECG.txt";
+	public static final double LOC_DC_LOW = 0.0;
+	public static final double LOC_DC_HIGH = 0.2;
+	
+	public static final double LOC_PAlpha_LOW = 0.12;
+	public static final double LOC_PAlpha_HIGH = 0.2;
+	public static final double LOC_QAlpha_LOW = -0.12;
+	public static final double LOC_QAlpha_HIGH = -5.0;
+	public static final double LOC_RAlpha_LOW = 5.0;
+	public static final double LOC_RAlpha_HIGH = 20.0;
+	public static final double LOC_SAlpha_LOW = -0.12;
+	public static final double LOC_SAlpha_HIGH = -5.0;
+	public static final double LOC_TAlpha_LOW = 0.12;
+	public static final double LOC_TAlpha_HIGH = 0.2;
+
+	public static final double LOC_PBeta_LOW = 0.1;
+	public static final double LOC_PBeta_HIGH = 0.3;
+	public static final double LOC_QBeta_LOW = 0.0;
+	public static final double LOC_QBeta_HIGH = 0.12;
+	public static final double LOC_RBeta_LOW = 0.0;
+	public static final double LOC_RBeta_HIGH = 0.12;
+	public static final double LOC_SBeta_LOW = 0.0;
+	public static final double LOC_SBeta_HIGH = 0.12;
+	public static final double LOC_TBeta_LOW = 0.1;
+	public static final double LOC_TBeta_HIGH = 0.3;
+	
+	public static final double LOC_PTheta_LOW = -0.5;
+	public static final double LOC_PTheta_HIGH = -0.12;
+	public static final double LOC_QSTheta_LOW = -0.12;
+	public static final double LOC_QSTheta_HIGH = 0.12;
+	public static final double LOC_TTheta_LOW = 0.12;
+	public static final double LOC_TTheta_HIGH = 0.5;
+	public static final double VEL_LOW = -0.001;
+	public static final double VEL_HIGH = 0.01;
+	public static final String str = "Single_ECG_9.txt";
 	public static final double ERR_TOLERANCE = 1E-20; // the smaller the tolerance, the more accurate the result, 
 	                                                  // but the number of iteration is increased
 	
@@ -76,12 +101,12 @@ public class ProblemSet {
 		}
 		if(PTheta<-0.5)
 			PTheta=-0.5;
-		if(QTheta<-0.15)
-			QTheta=-0.15;
+		if(QTheta<-0.05)
+			QTheta=-0.05;
 		if(TTheta>0.5)
 			TTheta=0.5;
-		if(STheta>0.15)
-			STheta=0.15;
+		if(STheta>0.05)
+			STheta=0.05;
 		if(PBeta>0.5)
 			PBeta=0.5;
 		if(QBeta>0.5)

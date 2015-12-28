@@ -98,7 +98,7 @@ public class PSOProcess implements PSOConstants {
 		}
 
 		System.out.println("----------------------------------------------");
-		System.out.println(gBestLocation.getLoc()[0] + "\t" +gBestLocation.getLoc()[3] + "\t" +gBestLocation.getLoc()[6] + "\t" +gBestLocation.getLoc()[8] + "\t" +gBestLocation.getLoc()[11]);
+		System.out.println(gBestLocation.getLoc()[0] + "\t" +gBestLocation.getLoc()[3] + "\t" +gBestLocation.getLoc()[6] + "\t" +gBestLocation.getLoc()[8] + "\t" +gBestLocation.getLoc()[11] + "\t" +gBestLocation.getLoc()[14]);
 		System.out.println(gBestLocation.getLoc()[1] + "\t" +gBestLocation.getLoc()[4] + "\t" +gBestLocation.getLoc()[7] + "\t" +gBestLocation.getLoc()[9] + "\t" +gBestLocation.getLoc()[12]);
 		System.out.println(gBestLocation.getLoc()[2] + "\t" +gBestLocation.getLoc()[5] + "\t" + "0" + "\t" +gBestLocation.getLoc()[10] + "\t" +gBestLocation.getLoc()[13]);
 		
@@ -111,9 +111,21 @@ public class PSOProcess implements PSOConstants {
 			
 			// randomize location inside a space defined in Problem Set
 			double[] loc = new double[PROBLEM_DIMENSION];
-			for(int j=0;j<PROBLEM_DIMENSION;j++){
-				loc[j] = ProblemSet.LOC_Y_LOW + generator.nextDouble() * (ProblemSet.LOC_Y_HIGH - ProblemSet.LOC_Y_LOW);
-			}
+			loc[0] = ProblemSet.LOC_PAlpha_LOW + generator.nextDouble() * (ProblemSet.LOC_PAlpha_HIGH - ProblemSet.LOC_PAlpha_LOW);
+			loc[1] = ProblemSet.LOC_PBeta_LOW + generator.nextDouble() * (ProblemSet.LOC_PBeta_HIGH - ProblemSet.LOC_PBeta_LOW);
+			loc[2] = ProblemSet.LOC_PTheta_LOW + generator.nextDouble() * (ProblemSet.LOC_PTheta_HIGH - ProblemSet.LOC_PTheta_LOW);
+			loc[3] = ProblemSet.LOC_QAlpha_LOW + generator.nextDouble() * (ProblemSet.LOC_QAlpha_HIGH - ProblemSet.LOC_QAlpha_LOW);
+			loc[4] = ProblemSet.LOC_QBeta_LOW + generator.nextDouble() * (ProblemSet.LOC_QBeta_HIGH - ProblemSet.LOC_QBeta_LOW);
+			loc[5] = ProblemSet.LOC_QSTheta_LOW + generator.nextDouble() * (ProblemSet.LOC_QSTheta_HIGH - ProblemSet.LOC_QSTheta_LOW);
+			loc[6] = ProblemSet.LOC_RAlpha_LOW + generator.nextDouble() * (ProblemSet.LOC_RAlpha_HIGH - ProblemSet.LOC_RAlpha_LOW);
+			loc[7] = ProblemSet.LOC_RBeta_LOW + generator.nextDouble() * (ProblemSet.LOC_RBeta_HIGH - ProblemSet.LOC_RBeta_LOW);
+			loc[8] = ProblemSet.LOC_SAlpha_LOW + generator.nextDouble() * (ProblemSet.LOC_SAlpha_HIGH - ProblemSet.LOC_SAlpha_LOW);
+			loc[9] = ProblemSet.LOC_SBeta_LOW + generator.nextDouble() * (ProblemSet.LOC_SBeta_HIGH - ProblemSet.LOC_SBeta_LOW);
+			loc[10] = ProblemSet.LOC_QSTheta_LOW + generator.nextDouble() * (ProblemSet.LOC_QSTheta_HIGH - ProblemSet.LOC_QSTheta_LOW);
+			loc[11] = ProblemSet.LOC_TAlpha_LOW + generator.nextDouble() * (ProblemSet.LOC_TAlpha_HIGH - ProblemSet.LOC_TAlpha_LOW);
+			loc[12] = ProblemSet.LOC_TBeta_LOW + generator.nextDouble() * (ProblemSet.LOC_TBeta_HIGH - ProblemSet.LOC_TBeta_LOW);
+			loc[13] = ProblemSet.LOC_TTheta_LOW + generator.nextDouble() * (ProblemSet.LOC_TTheta_HIGH - ProblemSet.LOC_TTheta_LOW);
+			loc[14] = ProblemSet.LOC_DC_LOW + generator.nextDouble() * (ProblemSet.LOC_DC_HIGH - ProblemSet.LOC_DC_LOW);
 			Location location = new Location(loc);
 			
 			// randomize velocity in the range defined in Problem Set
