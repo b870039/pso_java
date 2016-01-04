@@ -50,7 +50,7 @@ public class ProblemSet {
 	public static final double LOC_TTheta_HIGH = 0.5;
 	public static final double VEL_LOW = -0.001;
 	public static final double VEL_HIGH = 0.01;
-	public static final String str = "Single_ECG_9.txt";
+	public static final String str = "Single_ECG_2.txt";
 	public static final double ERR_TOLERANCE = 1E-20; // the smaller the tolerance, the more accurate the result, 
 	                                                  // but the number of iteration is increased
 	
